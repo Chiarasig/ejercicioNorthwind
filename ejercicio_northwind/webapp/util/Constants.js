@@ -14,18 +14,8 @@ sap.ui.define([], function (){
             propertyToFilter: "Name",
             routeDetail: "RouteDetail",
             app: "App",
-            bundleName: "com.proy.ejercicionorthwind.i18n.i18n",
-            languageEn: "en",
-            iconDark: "sap-icon://dark-mode",
-            iconModel: "iconModel",
-            sapFioriDark: "sap_fiori_3_dark",
-            sapFioriLight: "sap_fiori_3",
-            themeButton: "themeButton",
-            sapIconLight:"sap-icon://light-mode",
-            languageEs: "es",
         },
         comboBox:{
-            
             idProductIdComboBox: "idProductIdComboBox",
             productID: "ProductID",
             idProductNameComboBox: "idProductNameComboBox",
@@ -34,9 +24,17 @@ sap.ui.define([], function (){
         },
         language:{
             i18n: "i18n",
-            bundleName: "com.proy.ejerciciosapui5.i18n.i18n",
+            bundleName: "com.proy.ejercicionorthwind.i18n.i18n",
             languageEn: "en",
             languageEs: "es",
+        },
+        dark:{
+            iconDark: "sap-icon://dark-mode",
+            iconModel: "iconModel",
+            sapFioriDark: "sap_fiori_3_dark",
+            sapFioriLight: "sap_fiori_3",
+            themeButton: "themeButton",
+            sapIconLight:"sap-icon://light-mode",
         },
         succes:{
             orderMock: "orderMock",

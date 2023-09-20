@@ -6,7 +6,18 @@
 >
     <Page title="{i18n>title}">
          <content>
+         <HBox >
          <Button press="navBack" text="{i18n>NavigateBack}"/>
+         <Button
+            icon="sap-icon://world"
+            press="onChangeLanguage"
+        />
+        <Button
+            id="themeButton"
+            press="setDark"
+            icon="{iconModel>/icon}"
+        />
+         </HBox>
             <core:Fragment type="XML" fragmentName="com.proy.ejercicionorthwind.fragments.fragmentTool" />
             <core:Fragment type="XML" fragmentName="com.proy.ejercicionorthwind.fragments.fragmentTable" />
         </content>

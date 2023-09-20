@@ -2,10 +2,11 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "com/proy/ejercicionorthwind/util/Formatter",
     "com/proy/ejercicionorthwind/util/Constants",
+    "com/proy/ejercicionorthwind/util/Commons",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator"
-], function (Controller, Formatter, Constants,JSONModel, Filter, FilterOperator) {
+], function (Controller, Formatter, Constants, Commons, JSONModel, Filter, FilterOperator) {
     "use strict";
 
     return Controller.extend("com.proy.ejercicionorthwind.controller.Main", {
@@ -34,6 +35,21 @@ sap.ui.define([
             oModel.loadData(sPath);
             this.getView().setModel(oModel, Constants.model.mock);
             this._oTable = this.getView().byId(Constants.model.idProductsTable);
+            //dark
+            var oModel = new JSONModel({
+                icon: Constants.dark.iconDark
+            });
+            this.getView().setModel(oModel, Constants.dark.iconModel);
+            //language
+            var oResourceModel = this.getOwnerComponent().getModel(Constants.language.i18n);
+                oResourceModel.enhance({ bundleName: Constants.language.bundleName });
+                sap.ui.getCore().getConfiguration().setLanguage(Constants.language.languageEn);
+        },
+        onChangeLanguage: function(){
+            Commons.onChangeLanguage()
+        },
+        setDark: function(){
+            Commons.setDark()
         },
         onSearchButtonPress: function () {
             if (this._productIdSelected || this._productNameSelected) {
