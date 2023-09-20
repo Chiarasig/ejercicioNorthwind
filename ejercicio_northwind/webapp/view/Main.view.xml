@@ -6,7 +6,8 @@
     xmlns="sap.m"
 >
     <VBox>
-        <ComboBox
+    <HBox >
+    <ComboBox
             id="idProductIdComboBox"
             items="{
                 path: 'mock>/OrderCollection',
@@ -37,8 +38,19 @@
                 />
             </items>
         </ComboBox>
+        <Button text="{i18n>Search}" press="onSearchButtonPress" />
+        <Button text="{i18n>ClearFilters}" press="onClearFiltersPress" />
+        <Button
+            icon="sap-icon://world"
+            press="onChangeLanguage"
+        />
+        <Button
+            id="themeButton"
+            press="setDark"
+            icon="{iconModel>/icon}"
+        />
 
-        <!-- Tabla para mostrar datos -->
+    </HBox>
         <Table
             id="idProductsTable"
             inset="false"
@@ -48,16 +60,16 @@
         >
             <columns>
                 <Column width="12em">
-                    <Text text="Product Name" />
+                    <Text text="{i18n>ProductName}" />
                 </Column>
                 <Column width="8em">
-                    <Text text="Unit Price" />
+                    <Text text="{i18n>UnitPrice}" />
                 </Column>
                 <Column width="8em">
-                    <Text text="Total Price" />
+                    <Text text="{i18n>TotalPrice}" />
                 </Column>
                 <Column width="8em">
-                    <Text text="Extended Price" />
+                    <Text text="{i18n>ExtendedPrice}" />
                 </Column>
             </columns>
             <items>
@@ -70,15 +82,15 @@
                         <ObjectIdentifier title="{orderMock>ProductName}" />
                         <ObjectNumber
                             number="{orderMock>UnitPrice}"
-                            unit="USD"
+                            unit="{i18n>USD}"
                         />
                         <ObjectNumber
                             number="{= ${orderMock>UnitPrice} * ${orderMock>Quantity} }"
-                            unit="USD"
+                            unit="{i18n>USD}"
                         />
                         <ObjectNumber
                             number="{orderMock>ExtendedPrice}"
-                            unit="USD"
+                            unit="{i18n>USD}"
                             state="{path: 'orderMock>ExtendedPrice', formatter: '.Formatter.extendedPriceState'}"
                         />
                     </cells>

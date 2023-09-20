@@ -1,16 +1,20 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "com/proy/ejercicionorthwind/util/Formatter",
+    "com/proy/ejercicionorthwind/util/Constants",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator"
-], function (Controller, Formatter, JSONModel, Filter, FilterOperator) {
+], function (Controller, Formatter, Constants,JSONModel, Filter, FilterOperator) {
     "use strict";
 
     return Controller.extend("com.proy.ejercicionorthwind.controller.Main", {
         Formatter: Formatter,
+        _productIdSelected: false,
+        _productNameSelected: false,
+
         onInit: function () {
-            const url = sap.ui.require.toUrl("com/proy/ejercicionorthwind") + "/northwind/northwind.svc/";
+            const url = sap.ui.require.toUrl(Constants.model.moduleURL) + Constants.model.northwind;
             this._model = new sap.ui.model.odata.v2.ODataModel(url, {
                 json: true,
                 headers: {
@@ -20,56 +24,72 @@ sap.ui.define([
                 },
                 useBatch: true
             });
-            this._model.read("/Order_Details_Extendeds", {
+            this._model.read(Constants.model.orderRead, {
                 async: true,
                 success: jQuery.proxy(this.success, this),
                 error: jQuery.proxy(this.error, this)
             });
-
-            const sPath = jQuery.sap.getModulePath("com.proy.ejercicionorthwind") + "/localService/OrdersDetailsExtends.json";
+            const sPath = jQuery.sap.getModulePath(Constants.model.module) + Constants.model.ordersDetailsExtends;
             var oModel = new JSONModel();
             oModel.loadData(sPath);
-            this.getView().setModel(oModel, "mock");
-            this._oTable = this.getView().byId("idProductsTable");
-
-        },  
-        onProductIdChange: function (oEvent) {
-            const selectedProductId = oEvent.getSource().getSelectedItem().getKey();
-            this.filterTable(selectedProductId, "ProductID");
+            this.getView().setModel(oModel, Constants.model.mock);
+            this._oTable = this.getView().byId(Constants.model.idProductsTable);
         },
-        
-        onProductNameChange: function (oEvent) {
-            const selectedProductName = oEvent.getSource().getSelectedItem().getKey();
-            this.filterTable(selectedProductName, "ProductName");
-        },
-        filterTable: function (selectedValue, propertyName) {
-            const oTable = this.getView().byId("idProductsTable");
-            const aFilters = [];
-            if (selectedValue) {
-                const oFilter = new Filter(propertyName, FilterOperator.EQ, selectedValue);
-                aFilters.push(oFilter);
+        onSearchButtonPress: function () {
+            if (this._productIdSelected || this._productNameSelected) {
+                this._applyFilters();
             }
-            oTable.getBinding("items").filter(aFilters);
-        },        
+        },
+        onProductIdChange: function () {
+            this._productIdSelected = true;
+        },
+        onProductNameChange: function () {
+            this._productNameSelected = true;
+        },
+        _applyFilters: function () {
+            const oTable = this.getView().byId(Constants.model.idProductsTable);
+            const aFilters = [];
+
+            if (this._productIdSelected) {
+                const selectedProductId = this.getView().byId(Constants.comboBox.idProductIdComboBox).getSelectedItem().getKey();
+                const productIdFilter = new Filter(Constants.comboBox.productID, FilterOperator.EQ, selectedProductId);
+                aFilters.push(productIdFilter);
+            }
+
+            if (this._productNameSelected) {
+                const selectedProductName = this.getView().byId(Constants.comboBox.idProductNameComboBox).getSelectedItem().getKey();
+                const productNameFilter = new Filter(Constants.comboBox.productName, FilterOperator.EQ, selectedProductName);
+                aFilters.push(productNameFilter);
+            }
+            oTable.getBinding(Constants.comboBox.items).filter(aFilters);
+            this._productIdSelected = false;
+            this._productNameSelected = false;
+        },
         success: function (oData) {
             const oModel = new JSONModel(oData.results);
-            this.getView().setModel(oModel, "orderMock");
+            this.getView().setModel(oModel, Constants.succes.orderMock);
             console.log(oModel)
         },
         error: function () {
-            alert("Error");
+            alert(Constants.error.error);
         },
-        onItemPress: function(oEvent){
-            var oItem = oEvent.getSource().getBindingContext("orderMock");
+        onItemPress: function (oEvent) {
+            var oItem = oEvent.getSource().getBindingContext(Constants.succes.orderMock);
             const sPath = oItem.getPath();
-            const oItemSelect = this.getView().getModel("orderMock").getProperty(sPath);
+            const oItemSelect = this.getView().getModel(Constants.succes.orderMock).getProperty(sPath);
             console.log(oItemSelect);
             const oModel = new JSONModel(oItemSelect);
-            this.getOwnerComponent().setModel(oModel, "selectedOrderMock");
-            this.getOwnerComponent().getRouter().navTo("RouteDetail");
+            this.getOwnerComponent().setModel(oModel, Constants.succes.selectedOrderMock);
+            this.getOwnerComponent().getRouter().navTo(Constants.model.routeDetail);
         },
+        onClearFiltersPress: function () {
+            const oTable = this.getView().byId(Constants.model.idProductsTable);
+            oTable.getBinding(Constants.comboBox.items).filter([]);
+            this._productIdSelected = false;
+            this._productNameSelected = false;
+        }
     });
 });
 
 
-    
+

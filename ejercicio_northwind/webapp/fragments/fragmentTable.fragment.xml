@@ -17,17 +17,17 @@
 			columnsM="1"
 			singleContainerFullSize="false" >
 			<f:content>
-				<Label text="ProductName" />
+				<Label text="{i18n>ProductName}" />
 				<Text text="{selectedOrderMock>/ProductName}" />
-				<Label text="ProductID" />
+				<Label text="{i18n>ProductID}" />
 				<Text text="{selectedOrderMock>/ProductID}" />
-                <Label text="Extended Price" />
+                <Label text="{i18n>ExtendedPrice}" />
 				<Text text="{selectedOrderMock>/ExtendedPrice}" />
-                <Label text="Order ID" />
+                <Label text="{i18n>OrderId}" />
 				<Text text="{selectedOrderMock>/OrderID}" />
-                <Label text="Quantity" />
+                <Label text="{i18n>Quantity}" />
 				<Text text="{selectedOrderMock>/Quantity}" />
-                <Label text="UnitPrice" />
+                <Label text="{i18n>UnitPrice}" />
 				<Text text="{selectedOrderMock>/UnitPrice}" />
 			</f:content>
 		</f:SimpleForm>
