@@ -1,0 +1,13 @@
+<mvc:View
+    controllerName="com.proy.ejercicionorthwind.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+>
+    <Page title="{i18n>title}">
+         <content>
+            <core:Fragment type="XML" fragmentName="com.proy.ejercicionorthwind.fragments.fragmentTool" />
+            <core:Fragment type="XML" fragmentName="com.proy.ejercicionorthwind.fragments.fragmentTable" />
+        </content>
+    </Page>
+</mvc:View>

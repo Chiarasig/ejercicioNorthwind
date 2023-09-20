@@ -1,0 +1,89 @@
+<mvc:View
+    controllerName="com.proy.ejercicionorthwind.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+>
+    <VBox>
+        <ComboBox
+            id="idProductIdComboBox"
+            items="{
+                path: 'mock>/OrderCollection',
+                sorter: { path: 'ProductId' }
+            }"
+            selectionChange="onProductIdChange"
+        >
+            <items>
+                <core:ListItem
+                    key="{mock>ProductId}"
+                    text="{mock>ProductId}"
+                />
+            </items>
+        </ComboBox>
+
+        <ComboBox
+            id="idProductNameComboBox"
+            items="{
+                path: 'mock>/OrderCollection',
+                sorter: { path: 'ProductName' }
+            }"
+            selectionChange="onProductNameChange"
+        >
+            <items>
+                <core:ListItem
+                    key="{mock>ProductName}"
+                    text="{mock>ProductName}"
+                />
+            </items>
+        </ComboBox>
+
+        <!-- Tabla para mostrar datos -->
+        <Table
+            id="idProductsTable"
+            inset="false"
+            items="{
+                path: 'orderMock>/'
+            }"
+        >
+            <columns>
+                <Column width="12em">
+                    <Text text="Product Name" />
+                </Column>
+                <Column width="8em">
+                    <Text text="Unit Price" />
+                </Column>
+                <Column width="8em">
+                    <Text text="Total Price" />
+                </Column>
+                <Column width="8em">
+                    <Text text="Extended Price" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem
+                    type="Active"
+                    press="onItemPress"
+                    vAlign="Middle"
+                >
+                    <cells>
+                        <ObjectIdentifier title="{orderMock>ProductName}" />
+                        <ObjectNumber
+                            number="{orderMock>UnitPrice}"
+                            unit="USD"
+                        />
+                        <ObjectNumber
+                            number="{= ${orderMock>UnitPrice} * ${orderMock>Quantity} }"
+                            unit="USD"
+                        />
+                        <ObjectNumber
+                            number="{orderMock>ExtendedPrice}"
+                            unit="USD"
+                            state="{path: 'orderMock>ExtendedPrice', formatter: '.Formatter.extendedPriceState'}"
+                        />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </VBox>
+</mvc:View>

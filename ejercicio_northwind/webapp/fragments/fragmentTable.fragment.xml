@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+    <VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormDisplay354"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="ProductName" />
+				<Text text="{selectedOrderMock>/ProductName}" />
+				<Label text="ProductID" />
+				<Text text="{selectedOrderMock>/ProductID}" />
+                <Label text="Extended Price" />
+				<Text text="{selectedOrderMock>/ExtendedPrice}" />
+                <Label text="Order ID" />
+				<Text text="{selectedOrderMock>/OrderID}" />
+                <Label text="Quantity" />
+				<Text text="{selectedOrderMock>/Quantity}" />
+                <Label text="UnitPrice" />
+				<Text text="{selectedOrderMock>/UnitPrice}" />
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+</core:FragmentDefinition>
