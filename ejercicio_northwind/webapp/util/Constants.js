@@ -45,7 +45,7 @@ sap.ui.define([], function (){
         },
         formatter:{
             None: "None",
-            Success: "Succes",
+            Success: "Success",
             maxPrice: 100,
             minPrice: 0
         }

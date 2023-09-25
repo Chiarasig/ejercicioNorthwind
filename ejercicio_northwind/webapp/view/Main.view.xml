@@ -6,51 +6,56 @@
     xmlns="sap.m"
 >
     <VBox>
-    <HBox >
-    <ComboBox
-            id="idProductIdComboBox"
-            items="{
-                path: 'mock>/OrderCollection',
-                sorter: { path: 'ProductId' }
-            }"
-            selectionChange="onProductIdChange"
-        >
-            <items>
+   <HBox>
+            <ComboBox
+                id="idProductIdComboBox"
+                 selectedKey="{filters>/ProductId}"
+                items="{
+                    path: 'mock>/OrderCollection',
+                    sorter: { path: 'ProductId' }
+                }"
+            >
                 <core:ListItem
                     key="{mock>ProductId}"
                     text="{mock>ProductId}"
                 />
-            </items>
-        </ComboBox>
+            </ComboBox>
 
-        <ComboBox
-            id="idProductNameComboBox"
-            items="{
-                path: 'mock>/OrderCollection',
-                sorter: { path: 'ProductName' }
-            }"
-            selectionChange="onProductNameChange"
-        >
-            <items>
+            <ComboBox
+                id="idProductNameComboBox"
+                 selectedKey="{filters>/ProductName}"
+                items="{
+                    path: 'mock>/OrderCollection',
+                    sorter: { path: 'ProductName' }
+                }"
+            >
                 <core:ListItem
                     key="{mock>ProductName}"
                     text="{mock>ProductName}"
                 />
-            </items>
-        </ComboBox>
-        <Button text="{i18n>Search}" press="onSearchButtonPress" />
-        <Button text="{i18n>ClearFilters}" press="onClearFiltersPress" />
-        <Button
-            icon="sap-icon://world"
-            press="onChangeLanguage"
-        />
-        <Button
-            id="themeButton"
-            press="setDark"
-            icon="{iconModel>/icon}"
-        />
+            </ComboBox>
 
-    </HBox>
+            <Button
+                text="{i18n>Search}"
+                press="onSearchButtonPress"
+            />
+
+            <Button
+                text="{i18n>ClearFilters}"
+                press="onClear"
+            />
+
+            <Button
+                icon="sap-icon://world"
+                press="onChangeLanguage"
+            />
+
+            <Button
+                id="themeButton"
+                press="setDark"
+                icon="{iconModel>/icon}"
+            />
+        </HBox>
         <Table
             id="idProductsTable"
             inset="false"
