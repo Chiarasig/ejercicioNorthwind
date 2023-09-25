@@ -42,6 +42,12 @@ sap.ui.define([], function (){
         },
         error:{
           error: "Error"  
+        },
+        formatter:{
+            None: "None",
+            Success: "Succes",
+            maxPrice: 100,
+            minPrice: 0
         }
     };
 }, true)

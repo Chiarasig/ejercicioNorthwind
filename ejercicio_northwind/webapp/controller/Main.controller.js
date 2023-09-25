@@ -42,13 +42,13 @@ sap.ui.define([
             this.getView().setModel(oModel, Constants.dark.iconModel);
             //language
             var oResourceModel = this.getOwnerComponent().getModel(Constants.language.i18n);
-                oResourceModel.enhance({ bundleName: Constants.language.bundleName });
-                sap.ui.getCore().getConfiguration().setLanguage(Constants.language.languageEn);
+            oResourceModel.enhance({ bundleName: Constants.language.bundleName });
+            sap.ui.getCore().getConfiguration().setLanguage(Constants.language.languageEn);
         },
-        onChangeLanguage: function(){
+        onChangeLanguage: function () {
             Commons.onChangeLanguage()
         },
-        setDark: function(){
+        setDark: function () {
             Commons.setDark()
         },
         onSearchButtonPress: function () {

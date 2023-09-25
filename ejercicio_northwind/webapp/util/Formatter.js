@@ -1,21 +1,25 @@
-sap.ui.define(function() {
+sap.ui.define([
+	"com/proy/ejercicionorthwind/util/Constants",
+],	
+	function(Constants) {
 	"use strict";
+
 
 	var Formatter = {
 
 		extendedPriceState  :  function (sExtendedPrice) {
-			var fMaxExtendedPriceSuccess = 100;
+			var fMaxExtendedPriceSuccess = Constants.formatter.maxPrice;
 			var fAdjustedExtendedPrice = parseFloat(sExtendedPrice);
 
 			if (isNaN(fAdjustedExtendedPrice)) {
-				return "None";
+				return Constants.formatter.None;
 			} else {
-				if (fAdjustedExtendedPrice < 0) {
-					return "None";
+				if (fAdjustedExtendedPrice < Constants.formatter.minPrice) {
+					return Constants.formatter.None;
 				} else if (fAdjustedExtendedPrice < fMaxExtendedPriceSuccess) {
-					return "Success";
+					return Constants.formatter.Success;
 				} else {
-					return "Error";
+					return Constants.error.error;
 				}
 			}
 		},
